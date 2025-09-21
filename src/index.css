@@ -1,42 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Wireframe Design System - Minimal grayscale palette */
 
 @layer base {
   :root {
+    /* Wireframe color palette - HSL grayscale */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 0 0% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Dark gray for main actions */
+    --primary: 0 0% 20%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Light gray backgrounds */
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 20%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted - Subtle text and backgrounds */
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Slightly emphasized elements */
+    --accent: 0 0% 94%;
+    --accent-foreground: 0 0% 20%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Borders - Clean gray lines */
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 20%;
 
-    --radius: 0.5rem;
+    --radius: 0.375rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -99,7 +105,35 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  /* Wireframe-specific styles */
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-['Inter',sans-serif] antialiased;
+  }
+  
+  /* Clean typography hierarchy */
+  h1 { @apply text-2xl font-semibold tracking-tight; }
+  h2 { @apply text-xl font-medium tracking-tight; }
+  h3 { @apply text-lg font-medium; }
+  h4 { @apply text-base font-medium; }
+  
+  /* Wireframe component styles */
+  .wireframe-container {
+    @apply max-w-6xl mx-auto px-4 py-6;
+  }
+  
+  .wireframe-card {
+    @apply bg-card border border-border rounded-lg p-6 shadow-sm;
+  }
+  
+  .wireframe-input {
+    @apply w-full px-3 py-2 border border-input rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent;
+  }
+  
+  .wireframe-button {
+    @apply px-4 py-2 border border-border rounded-md font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-ring;
+  }
+  
+  .wireframe-button-primary {
+    @apply bg-primary text-primary-foreground border-primary hover:bg-primary/90;
   }
 }

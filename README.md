@@ -1,73 +1,260 @@
-# Welcome to your Lovable project
+# Otaku Forum Frontend
 
-## Project info
+A modern, wireframe-style frontend built with React, TypeScript, Vite, shadcn-ui, and Tailwind CSS for the Otaku Forum API. This application provides a complete forum experience with articles, discussions, user profiles, and more.
 
-**URL**: https://lovable.dev/projects/6bc0bc71-a749-4b34-acc7-542f8d107c4b
+## Features
 
-## How can I edit this code?
+### 🎨 Wireframe Design
+- Clean, minimalist grayscale design
+- Focus on content and functionality
+- Responsive mobile-first approach
+- Inter font family for excellent readability
 
-There are several ways of editing your application.
+### 🔐 Authentication
+- User registration and login
+- JWT token-based authentication
+- Automatic token refresh
+- Protected routes and role-based access
 
-**Use Lovable**
+### 📝 Articles
+- Browse and read articles with categories
+- Create, edit, and delete articles (authenticated users)
+- Like articles and view statistics
+- Rich commenting system with nested replies
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/6bc0bc71-a749-4b34-acc7-542f8d107c4b) and start prompting.
+### 💬 Forum
+- Browse topics by category
+- Create and participate in discussions
+- Reply to topics with full threading
+- Pinned and locked topic support
 
-Changes made via Lovable will be committed automatically to this repo.
+### 👤 User Profiles
+- View user profiles with statistics
+- Edit personal information
+- Track user's articles and topics
+- Avatar and cover image support
 
-**Use your preferred IDE**
+### 🔍 Search
+- Global search across articles and topics
+- Category filtering
+- Real-time search suggestions
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Tech Stack
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- **Frontend Framework**: React 18 with TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS with wireframe design system
+- **UI Components**: shadcn-ui
+- **State Management**: React Context API
+- **HTTP Client**: Axios with interceptors
+- **Data Fetching**: TanStack Query
+- **Routing**: React Router DOM
+- **Icons**: Lucide React
+- **Date Formatting**: date-fns
 
-Follow these steps:
+## Prerequisites
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- Node.js 18+ and npm
+- Flask Otaku Forum API running on `http://localhost:5000`
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## Installation & Setup
 
-# Step 3: Install the necessary dependencies.
-npm i
+1. **Clone the repository**
+   ```bash
+   git clone [your-repo-url]
+   cd otaku-forum-frontend
+   ```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser**
+   Navigate to `http://localhost:8080`
+
+## API Integration
+
+The frontend connects to your Flask API at `http://localhost:5000/api/v1`. Make sure your backend:
+
+### CORS Configuration
+Configure your Flask API to allow requests from the frontend:
+
+**Development (local):**
+```python
+from flask_cors import CORS
+CORS(app, origins=["http://localhost:8080"])
 ```
 
-**Edit a file directly in GitHub**
+**Production (Vercel):**
+```python
+CORS(app, origins=["https://your-app.vercel.app"])
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Required API Endpoints
+The frontend expects all endpoints from your Flask API:
 
-**Use GitHub Codespaces**
+- **Health**: `GET /health`
+- **Auth**: `POST /auth/register`, `POST /auth/login`, `POST /auth/refresh`, `GET /auth/me`
+- **Users**: `GET /users`, `GET /users/<id>`, `PUT /users/me`, `GET /users/leaderboard`
+- **Articles**: Full CRUD with likes and filtering
+- **Forum**: Topics, replies, categories
+- **Comments**: Nested comments with moderation
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Project Structure
 
-## What technologies are used for this project?
+```
+src/
+├── components/          # Reusable UI components
+│   ├── ui/             # shadcn-ui components
+│   ├── Layout.tsx      # Main layout wrapper
+│   └── PrivateRoute.tsx # Protected route wrapper
+├── contexts/           # React Context providers
+│   └── AuthContext.tsx # Authentication state
+├── hooks/              # Custom React hooks
+├── pages/              # Page components
+│   ├── Home.tsx        # Landing page
+│   ├── Login.tsx       # Authentication
+│   ├── Register.tsx    # User registration
+│   ├── ArticleDetail.tsx # Article view
+│   ├── Forum.tsx       # Forum listing
+│   ├── Profile.tsx     # User profiles
+│   └── Search.tsx      # Search functionality
+├── services/           # API integration
+│   └── api.ts          # Axios client & endpoints
+├── types/              # TypeScript definitions
+└── styles/
+    └── index.css       # Wireframe design system
+```
 
-This project is built with:
+## Design System
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+The application implements a clean wireframe aesthetic:
 
-## How can I deploy this project?
+### Color Palette (HSL)
+```css
+--background: 0 0% 100%;     /* Pure white */
+--foreground: 0 0% 15%;      /* Dark gray text */
+--muted: 0 0% 96%;           /* Light gray backgrounds */
+--border: 0 0% 90%;          /* Gray borders */
+--primary: 0 0% 20%;         /* Dark gray for actions */
+```
 
-Simply open [Lovable](https://lovable.dev/projects/6bc0bc71-a749-4b34-acc7-542f8d107c4b) and click on Share -> Publish.
+### Typography
+- **Font**: Inter (Google Fonts)
+- **Hierarchy**: Consistent heading sizes
+- **Readability**: High contrast, optimal line spacing
 
-## Can I connect a custom domain to my Lovable project?
+### Components
+All components follow the wireframe principles:
+- Clean borders and shadows
+- Minimal color usage
+- Focus on content hierarchy
+- Consistent spacing (4px grid)
 
-Yes, you can!
+## Key Features Implementation
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### Authentication Flow
+1. User logs in → JWT tokens stored in localStorage
+2. Axios interceptor adds `Authorization: Bearer <token>` to requests
+3. Automatic token refresh on 401 responses
+4. Context provides auth state to all components
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+### Real-time Features
+- Like/unlike articles and comments
+- Reply to comments with threading
+- Forum topic creation and replies
+- User profile updates
+
+### Error Handling
+- Toast notifications for user feedback
+- Axios interceptors for global error handling
+- Form validation with helpful messages
+- Network error recovery
+
+## Deployment
+
+### Deploy to Vercel
+
+1. **Build the project**
+   ```bash
+   npm run build
+   ```
+
+2. **Install Vercel CLI**
+   ```bash
+   npm i -g vercel
+   ```
+
+3. **Deploy**
+   ```bash
+   vercel --prod
+   ```
+
+4. **Update CORS**
+   Configure your Flask API to allow requests from your Vercel domain.
+
+### Environment Variables
+For production deployment, you may need to configure:
+- API base URL (if different from localhost:5000)
+- Authentication settings
+- Error tracking services
+
+## Development
+
+### Available Scripts
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview build locally
+- `npm run lint` - Run ESLint
+
+### Code Style
+- TypeScript strict mode
+- ESLint + Prettier configuration
+- Consistent import ordering
+- Component-first architecture
+
+## Testing with Backend
+
+To test the full integration:
+
+1. **Start your Flask API** on `http://localhost:5000`
+2. **Start the frontend** with `npm run dev`
+3. **Register a new user** to test authentication
+4. **Create articles and topics** to test CRUD operations
+5. **Test commenting and replies** for nested functionality
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Follow the existing code style
+4. Test with the backend API
+5. Submit a pull request
+
+## Common Issues
+
+### CORS Errors
+- Ensure Flask API has proper CORS configuration
+- Check that API is running on correct port (5000)
+
+### Authentication Problems
+- Clear localStorage if tokens are corrupted
+- Verify JWT secret key matches between frontend/backend
+
+### API Connection Issues
+- Confirm API base URL in `src/services/api.ts`
+- Check network connectivity to localhost:5000
+
+## License
+
+MIT License - feel free to use this project as a base for your own forum applications.
+
+---
+
+Built with ❤️ for the otaku community
